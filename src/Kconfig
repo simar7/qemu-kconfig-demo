@@ -1,0 +1,340 @@
+# Kconfig QEMU configuration
+
+mainmenu "QEMU Configuration (DEMO)"
+
+menu "Target Architecture(s)"
+
+    config linux
+        bool "linux"
+        help
+            Build for linux.
+    
+    config softmmu
+        bool "softmmu"
+        help
+            Build with softmmu option enabled.
+    config bsd
+        bool "bsd"
+        help
+            Build for BSD.
+endmenu
+
+menu "Board(s)"
+    
+    config x86
+        bool "x86"
+        depends on softmmu || bsd || linux
+        help
+            Configure as an x86 target.
+
+    config ARM
+        bool "ARM"
+        depends on linux || softmmu
+        help
+            Configure as an ARM target.
+
+    config Alpha
+       bool "Alpha"
+       depends on linux || softmmu
+       help
+            Configure as an Alpha target.
+    
+    config Cris 
+       bool "Cris"
+       depends on linux || softmmu
+       help
+            Configure as a Cris target.
+
+    config i386
+       bool "i386"
+       depends on linux || bsd || softmmu
+       help
+            Configure as an i386 target.
+
+    config lm32
+       bool "lm32"
+       depends on softmmu
+       help
+            Configure as a lm32 target.
+
+    config m68k
+       bool "m68k"
+       depends on linux || softmmu
+       help
+            Configure as a m68k target.
+
+    config microblazeel 
+        bool "microblazeel"
+        depends on linux || softmmu
+        help
+            Configure as a microblaze-el target.
+
+    config microblaze
+       bool "microblaze"
+       depends on linux || softmmu
+       help
+            Configure as a microblaze target.
+
+    config mips64el
+       bool "mips64el"
+       depends on linux || softmmu
+       help
+            Configure as a mips64-el target.
+
+    config mips64
+       bool "mips64"
+       depends on linux || softmmu 
+       help
+            Configure as a mips64 target.
+
+    config mipsel
+       bool "mipsel"
+       depends on linux || softmmu
+       help
+            Configure as a mips-el target.
+
+    config mips
+       bool "mips"
+       depends on softmmu
+       help
+            Configure as a mips target.
+
+    config mipsn32el
+       bool "mipsn32el"
+       depends on linux
+       help
+            Configure as a mipsn32-el target.
+
+    config mipsn32
+       bool "mipsn32"
+       depends on linux
+       help
+            Configure as a mipsn32 target.
+
+    config moxie
+       bool "moxie"
+       depends on softmmu
+       help
+            Configure as a moxie target.
+
+    config or32 
+       bool "or32"
+       depends on linux || softmmu
+       help
+            Configure as a or32 target.
+
+    config ppc64abi32
+       bool "ppc64abi32"
+       depends on linux
+       help
+            Configure as a ppc64-abi32 target.
+
+    config ppc64
+       bool "ppc64"
+       depends on linux || softmmu
+       help
+            Configure as a ppc64 target.
+
+    config ppcemb
+       bool "ppcemb"
+       depends on softmmu
+       help
+            Configure as a ppcemb target.
+
+    config ppc
+       bool "ppc"
+       depends on linux || softmmu
+       help
+            Configure as a ppc target.
+
+    config s390x
+       bool "s390x"
+       depends on linux || softmmu
+       help
+            Configure as a s390x target.
+
+    config sh4eb
+       bool "sh4eb"
+       depends on linux || softmmu
+       help
+            Configure as a sh4eb target.
+
+    config sh4
+       bool "sh4"
+       depends on softmmu
+       help
+            Configure as a sh4 target.
+
+    config sparc32plus
+       bool "sparc32plus"
+       depends on linux
+       help
+            Configure as a sparc32-plus target.
+
+    config sparc64
+       bool "sparc64"
+       depends on bsd || linux || softmmu
+       help
+            Configure as a sparc64 target.
+
+    config sparc
+       bool "sparc"
+       depends on bsd || linux || softmmu
+       help
+            Configure as a sparc target.
+
+    config unicore32
+       bool "unicore32"
+       depends on linux || softmmu
+       help
+            Configure as an unicore32 target.
+
+    config xtensaeb
+       bool "xtensaeb"
+       depends on softmmu
+       help
+            Configure as an xtensaeb target.
+
+    config xtensa
+       bool "xtensa"
+       depends on softmmu
+       help
+            Configure as a xtensa target.
+
+endmenu
+
+menu "Onboard Buses - (Currently only for ARM)"
+
+    config USB
+        bool "USB"
+        default y
+        help
+            Enable USB bus.
+
+    config PCI
+        bool "PCI"
+        default y
+        help
+            Enable PCI bus. 
+
+    config SERIAL
+        bool "Serial"
+        default y
+        help
+            Enable Serial bus.
+
+    config ISA 
+        bool "ISA"
+        default y
+        help
+            Enable ISA bus.
+
+    config SCSI
+        bool "SCSI"
+        default y
+        help
+            Enable SCSI bus.
+
+    config I2C
+        bool "I2C"
+        default y
+        help
+            Enable I2C bus.
+endmenu
+
+menu "Hardware support (Limited to certain devices)"
+    
+    config GDBSTUB_XML 
+        bool "GDBSTUB_XML"
+        default y
+        help
+            Enable GDBSTUB_XML.
+    
+    config VGA
+        bool "VGA"
+        default y
+        help
+            Enable VGA.
+
+    config ISA_MMIO 
+        depends on ISA
+        bool "ISA_MMIO"
+        default y
+        help
+            Enable ISA MMIO.
+
+    config NAND
+        bool "NAND"
+        default y
+        help
+            Enable NAND.
+
+    config ECC
+        bool "ECC"
+        default y
+        help
+            Enable ECC.
+
+    config PTIMER
+        depends on SERIAL
+        bool "SERIAL"
+        default y
+        help
+            Enable PTIMER.
+
+    config SD
+        depends on USB
+        bool "SD"
+        default y
+        help
+            Enable SD storage.
+
+    config LSI_SCSI
+        depends on SCSI
+        bool "lsi53c895a scsi controllers"
+        default y
+        help
+            Support boot from qemu-emulated lsi53c895a scsi storage.
+    
+    config SDHCI
+        depends on SD
+        bool "SD HCI controllers"
+        default y
+        help
+            Support SD HCI controllers.
+    
+    config USB_OHCI
+        depends on USB
+        bool "USB OHCI controllers"
+        default y
+        help
+            Support USB OHCI controllers.
+    
+    config USB_EHCI
+        depends on USB
+        bool "USB EHCI controllers"
+        default y
+        help
+            Support USB EHCI controllers.
+    
+    config USB_MSC
+        depends on USB && DRIVES
+        bool "USB drives"
+        default y
+        help
+            Support USB BOT (bulk-only transport) disks.
+    
+    config USB_UAS
+        depends on USB && DRIVES
+        bool "UAS drives"
+        default y
+        help
+            Support USB UAS (usb attached scsi) disks.
+    
+    config USB_HUB
+        depends on USB
+        bool "USB hubs"
+        default y
+        help
+            Support USB hubs.
+endmenu
