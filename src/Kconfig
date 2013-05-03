@@ -2,7 +2,7 @@
 
 mainmenu "QEMU Configuration (DEMO)"
 
-menu "Target Architecture(s)"
+menu "Target(s)"
 
     config linux
         bool "linux"
@@ -19,7 +19,7 @@ menu "Target Architecture(s)"
             Build for BSD.
 endmenu
 
-menu "Board(s)"
+menu "Architecture(s)"
     
     config x86
         bool "x86"
@@ -203,7 +203,107 @@ menu "Board(s)"
 
 endmenu
 
-menu "Onboard Buses - (Currently only for ARM)"
+menu "Machine(s) - (currently only for i386)"
+    
+    config Standard_PC
+        bool "Standard PC"
+        depends on i386
+        select pc-i440fx-1.4
+        select pc-i440fx-1.5
+        select pc-1.3
+        select pc-1.2
+        select pc-1.1
+        select pc-1.0
+        select pc-0.15
+        select pc-0.14
+        select pc-0.13
+        select pc-0.12
+        select pc-0.11
+        select pc-0.10
+        select isapc
+        select pc-q35-1.5
+        select pc-q35-1.4
+        
+        help
+            Enables all machines on i386.
+
+    config StandardPC_i440FX
+        bool "Standard PC (i440FX + PIIX, 1996) only"
+        depends on i386
+        default y
+        select pc-i440fx-1.5
+        select pc-i440fx-1.4
+        help
+            Enables only (i440FX + PIIX, 1996) ver 1.4 and 1.5 on i386.
+
+    config StandardPC_Q35
+        bool "Standard PC (Q35 + ICH9, 2009)"
+        depends on i386
+        select pc-q35-1.5
+        select pc-q35-1.4
+        help
+            Enables only (Q35 + ICH9, 2009) ver 1.4 and 1.5 on i386.
+    
+    config ISAPC
+        bool "ISA-only PC"
+        depends on i386
+        select isapc
+        help
+            Enables only ISA-PC on i386.
+
+endmenu
+
+menu "Board(s) - (currently only for i386)"
+    
+    config pc-i440fx-1.5
+        bool "pc-i440fx-1.5"
+    
+    config pc-i440fx-1.4
+        bool "pc-i440fx-1.4"
+
+    config pc-1.3
+        bool "pc-1.3"
+    
+    config pc-1.2
+        bool "pc-1.2"
+
+    config pc-1.1
+        bool "pc-1.1"
+
+    config pc-1.0
+        bool "pc-1.0"
+
+    config pc-0.15
+        bool "pc-0.15"
+
+    config pc-0.14
+        bool "pc-0.14"
+
+    config pc-0.13
+        bool "pc-0.13"
+
+    config pc-0.12
+        bool "pc-0.12"
+
+    config pc-0.11
+        bool "pc-0.11"
+
+    config pc-0.10
+        bool "pc-0.10"
+
+    config isapc
+        bool "isapc"
+
+    config pc-q35-1.5
+        bool "pc-q35-1.5"
+
+    config pc-q35-1.4
+        bool "pc-q35-1.4"
+
+
+endmenu
+
+menu "Onboard Buses - (Demo representation only)"
 
     config USB
         bool "USB"
@@ -240,9 +340,16 @@ menu "Onboard Buses - (Currently only for ARM)"
         default y
         help
             Enable I2C bus.
+    
+    config IDE
+        bool "IDE"
+        default y
+        help
+            Enable IDE bus.
+
 endmenu
 
-menu "Hardware support (Limited to certain devices)"
+menu "Hardware support - (Demo representation only)"
     
     config GDBSTUB_XML 
         bool "GDBSTUB_XML"
@@ -337,4 +444,12 @@ menu "Hardware support (Limited to certain devices)"
         default y
         help
             Support USB hubs.
+
+    config DRIVES
+        depends on IDE
+        default y
+        bool "IDE Drive interface"
+        help 
+            Support for disk interface.
+
 endmenu
